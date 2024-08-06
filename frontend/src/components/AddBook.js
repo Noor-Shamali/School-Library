@@ -47,7 +47,7 @@ const AddBook = () => {
                 />
                 <button type="submit">Add Book</button>
             </form>
-            {message && <p className="message">{message}</p>}
+            {message && <p className={message.includes('failed') ? 'error' : 'message'}>{message}</p>}
         </div>
     );
 };

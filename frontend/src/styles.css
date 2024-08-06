@@ -1,84 +1,105 @@
 body {
     font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    background-color: #1e3a5f;
+    color: #ffffff;
     margin: 0;
     padding: 0;
 }
 
-.container {
-    width: 80%;
-    margin: auto;
-    overflow: hidden;
-    padding: 20px;
-}
-
 header {
-    background: #333;
-    color: #fff;
-    padding: 10px 0;
+    background-color: #14233c;
+    padding: 20px;
     text-align: center;
-    margin-bottom: 20px;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-h2 {
-    color: #333;
-    margin-bottom: 20px;
+header h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+nav a {
+    color: white;
+    margin: 0 15px;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+.container {
+    padding: 20px;
 }
 
 form {
-    background: #fff;
+    margin: 20px 0;
+    background-color: #2b4a6e;
     padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 8px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
-input[type="text"], input[type="email"], input[type="password"] {
-    width: 100%;
+input[type="text"],
+input[type="email"],
+button {
+    display: block;
+    margin: 10px 0;
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    width: 100%;
+    max-width: 300px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #1e3a5f;
+    color: white;
+    font-size: 16px;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus {
+    outline: none;
+    border-color: #5a9bd4;
 }
 
 button {
-    display: inline-block;
-    padding: 10px 20px;
+    background-color: #356abc;
+    color: white;
     border: none;
-    background: #333;
-    color: #fff;
-    border-radius: 4px;
     cursor: pointer;
+    font-size: 16px;
 }
 
 button:hover {
-    background: #555;
+    background-color: #4682b4;
 }
 
 table {
     width: 100%;
-    margin-top: 20px;
     border-collapse: collapse;
+    margin-top: 20px;
 }
 
-table, th, td {
-    border: 1px solid #ddd;
-}
-
-th, td {
+table th,
+table td {
+    border: 1px solid #ccc;
     padding: 10px;
     text-align: left;
 }
 
-th {
-    background: #333;
-    color: #fff;
+table th {
+    background-color: #2b4a6e;
+}
+
+table tr:nth-child(even) {
+    background-color: #2b4a6e;
 }
 
 .message {
-    margin: 10px 0;
-    padding: 10px;
-    background: #e1f3e1;
-    border-left: 5px solid #4CAF50;
-    color: #333;
-    border-radius: 4px;
+    color: #00ff00;
+}
+
+.error {
+    color: #ff0000;
 }

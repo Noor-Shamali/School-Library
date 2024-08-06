@@ -48,7 +48,7 @@ const Register = () => {
                 />
                 <button type="submit">Register</button>
             </form>
-            {message && <p className="message">{message}</p>}
+            {message && <p className={message.includes('failed') ? 'error' : 'message'}>{message}</p>}
         </div>
     );
 };

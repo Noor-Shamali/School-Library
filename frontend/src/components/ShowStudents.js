@@ -11,7 +11,7 @@ const ShowStudents = () => {
                 const response = await axios.get('http://localhost:5000/api/students');
                 setStudents(response.data);
             } catch (error) {
-                setMessage('Failed to load students: ' + error.message);
+                setMessage('Failed to load students data: ' + error.message);
             }
         };
         fetchStudents();
@@ -20,7 +20,7 @@ const ShowStudents = () => {
     return (
         <div>
             <h2>All Students</h2>
-            {message && <p>{message}</p>}
+            {message && <p className="error">{message}</p>}
             <table>
                 <thead>
                     <tr>

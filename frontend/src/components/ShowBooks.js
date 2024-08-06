@@ -20,7 +20,7 @@ const ShowBooks = () => {
     return (
         <div>
             <h2>All Books</h2>
-            {message && <p className="message">{message}</p>}
+            {message && <p className="error">{message}</p>}
             <table>
                 <thead>
                     <tr>

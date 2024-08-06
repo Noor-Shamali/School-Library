@@ -5,6 +5,8 @@ import Login from './components/Login';
 import UserProfile from './components/UserProfile';
 import AddBook from './components/AddBook';
 import ShowBooks from './components/ShowBooks';
+import AddStudent from './components/AddStudent';
+import ShowStudents from './components/ShowStudents';
 import './styles.css';
 
 function App() {
@@ -18,7 +20,9 @@ function App() {
                         <Link to="/login">Login</Link> | 
                         <Link to="/user/:id">User Profile</Link> | 
                         <Link to="/add-book">Add Book</Link> | 
-                        <Link to="/show-books">Show Books</Link>
+                        <Link to="/show-books">Show Books</Link> | 
+                        <Link to="/add-student">Add Student</Link> | 
+                        <Link to="/show-students">Show Students</Link>
                     </nav>
                 </header>
                 <div className="container">
@@ -28,6 +32,8 @@ function App() {
                         <Route path="/user/:id" element={<UserProfile />} />
                         <Route path="/add-book" element={<AddBook />} />
                         <Route path="/show-books" element={<ShowBooks />} />
+                        <Route path="/add-student" element={<AddStudent />} />
+                        <Route path="/show-students" element={<ShowStudents />} />
                     </Routes>
                 </div>
             </div>
