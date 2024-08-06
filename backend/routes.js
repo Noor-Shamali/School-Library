@@ -3,12 +3,14 @@ const db = require('./db');
 const nodemailer = require('nodemailer');
 const router = express.Router();
 
-// Create reusable transporter object using the default SMTP transport
+// Load environment variables
+require('dotenv').config();
+
 const transporter = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'your-email@gmail.com', // your Gmail address
-        pass: 'your-email-password'   // your Gmail password
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
     }
 });
 
@@ -69,11 +71,11 @@ router.get('/books/search', async (req, res) => {
 router.post('/students', async (req, res) => {
     const { first_name, last_name, email } = req.body;
     try {
-        const [result] = await db.execute('INSERT INTO students (first_name, last_name, email) VALUES (?, ?, ?)', [first_name, last_name, email]);
+        const [result] = await db.execute('INSERT INTO students (first_name, last_name, email, subscription_status) VALUES (?, ?, ?, ?)', [first_name, last_name, email, 'Unconfirmed']);
         // Send confirmation email
         const confirmationUrl = `http://localhost:3000/confirm/${result.insertId}`;
         const mailOptions = {
-            from: 'your-email@gmail.com',
+            from: process.env.EMAIL_USER,
             to: email,
             subject: 'Email Confirmation',
             html: `<p>Click <a href="${confirmationUrl}">here</a> to confirm your email.</p>`
@@ -129,6 +131,23 @@ router.get('/borrowed', async (req, res) => {
         const [borrowedBooks] = await db.execute('SELECT * FROM borrowed_books');
         res.status(200).json(borrowedBooks);
     } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+// Login route
+router.post('/login', async (req, res) => {
+    const { email } = req.body;
+    console.log('Received login request for email:', email);  // Add this line
+    try {
+        const [users] = await db.execute('SELECT * FROM students WHERE email = ?', [email]);
+        if (users.length > 0) {
+            res.status(200).json({ message: 'Login successful', user: users[0] });
+        } else {
+            res.status(401).json({ message: 'Invalid email' });
+        }
+    } catch (error) {
+        console.error('Error during login:', error);  // Add this line
         res.status(500).json({ error: error.message });
     }
 });

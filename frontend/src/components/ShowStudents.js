@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const UserProfile = () => {
+const ShowStudents = () => {
     const [students, setStudents] = useState([]);
     const [message, setMessage] = useState('');
 
@@ -11,7 +11,7 @@ const UserProfile = () => {
                 const response = await axios.get('http://localhost:5000/api/students');
                 setStudents(response.data);
             } catch (error) {
-                setMessage('Failed to load students data: ' + error.message);
+                setMessage('Failed to load students: ' + error.message);
             }
         };
         fetchStudents();
@@ -20,7 +20,7 @@ const UserProfile = () => {
     return (
         <div>
             <h2>All Students</h2>
-            {message && <p className="message">{message}</p>}
+            {message && <p>{message}</p>}
             <table>
                 <thead>
                     <tr>
@@ -45,4 +45,4 @@ const UserProfile = () => {
     );
 };
 
-export default UserProfile;
+export default ShowStudents;

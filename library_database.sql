@@ -1,6 +1,6 @@
-DROP DATABASE IF EXISTS library_database;
-CREATE DATABASE library_database;
-USE library_database;
+DROP DATABASE IF EXISTS school_library;
+CREATE DATABASE school_library;
+USE school_library;
 
 CREATE TABLE categories (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -31,3 +31,5 @@ CREATE TABLE borrowed_books (
     FOREIGN KEY (book_id) REFERENCES books(id),
     FOREIGN KEY (student_id) REFERENCES students(id)
 );
+
+INSERT INTO students (first_name, last_name, email, subscription_status) VALUES ('Noor', 'Shamali', 'noor.mohammad.shamali@gmail.com', 'Unconfirmed');
