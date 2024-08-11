@@ -258,12 +258,11 @@ router.get('/fees/:student_id', async (req, res) => {
     }
 });
 
-// Get all subscription fees with student details
-router.get('/fees', async (req, res) => {
+// Route to get all subscription fees along with student details
+router.get('/all-fees', async (req, res) => {
     try {
         const query = `
-            SELECT subscription_fees.id, subscription_fees.payment_date, subscription_fees.amount, 
-                   students.first_name, students.last_name, students.email 
+            SELECT students.first_name, students.last_name, students.email, subscription_fees.payment_date, subscription_fees.amount 
             FROM subscription_fees 
             JOIN students ON subscription_fees.student_id = students.id
         `;
@@ -271,10 +270,9 @@ router.get('/fees', async (req, res) => {
         res.status(200).json(fees);
     } catch (error) {
         console.error('Error fetching subscription fees:', error);
-        res.status(500).json({ error: error.message });
+        res.status(500).json({ error: 'Failed to fetch subscription fees' });
     }
 });
-
 
 
 module.exports = router;

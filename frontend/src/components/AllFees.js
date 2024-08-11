@@ -1,27 +1,27 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles.css';
 
-const AllFees = () => {
+function AllFees() {
     const [fees, setFees] = useState([]);
-    const [message, setMessage] = useState('');
+    const [error, setError] = useState('');
 
     useEffect(() => {
         const fetchFees = async () => {
             try {
-                const response = await axios.get('http://localhost:5000/api/fees');
+                const response = await axios.get('http://localhost:5000/api/all-fees');
                 setFees(response.data);
             } catch (error) {
-                setMessage('Failed to load data: ' + error.message);
+                setError('Failed to load fees: ' + error.message);
             }
         };
         fetchFees();
     }, []);
 
     return (
-        <div>
+        <div className="container">
             <h2>All Subscription Fees</h2>
-            {message && <p className="error">{message}</p>}
+            {error && <p className="error">{error}</p>}
             <table>
                 <thead>
                     <tr>
@@ -33,8 +33,8 @@ const AllFees = () => {
                     </tr>
                 </thead>
                 <tbody>
-                    {fees.map((fee) => (
-                        <tr key={fee.id}>
+                    {fees.map((fee, index) => (
+                        <tr key={index}>
                             <td>{fee.first_name}</td>
                             <td>{fee.last_name}</td>
                             <td>{fee.email}</td>
@@ -46,6 +46,6 @@ const AllFees = () => {
             </table>
         </div>
     );
-};
+}
 
 export default AllFees;
