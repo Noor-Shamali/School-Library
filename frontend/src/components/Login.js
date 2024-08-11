@@ -1,6 +1,8 @@
+// Login.js
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import '../styles.css';
 
 const Login = () => {
     const [email, setEmail] = useState('');
@@ -11,11 +13,11 @@ const Login = () => {
         e.preventDefault();
         try {
             const response = await axios.post('http://localhost:5000/api/login', { email });
-            setMessage(response.data.message);
-            localStorage.setItem('user', JSON.stringify(response.data.user));
-            navigate('/show-books'); // Navigate to Show Books page on successful login
+            if (response.status === 200) {
+                navigate(`/user/${response.data.user.id}`);
+            }
         } catch (error) {
-            setMessage('Login failed: ' + (error.response && error.response.data.message ? error.response.data.message : 'undefined'));
+            setMessage('Login failed: ' + error.message);
         }
     };
 
@@ -32,7 +34,7 @@ const Login = () => {
                 />
                 <button type="submit">Login</button>
             </form>
-            {message && <p className="error">{message}</p>}
+            {message && <p>{message}</p>}
         </div>
     );
 };
